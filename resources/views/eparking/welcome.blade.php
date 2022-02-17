@@ -89,11 +89,9 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
-              <label class="form-label">Type here...</label>
-              <input type="text" class="form-control">
             </div>
           </div>
-          <form action="/login/logout" method="post">
+          <form action="/admin/login/logout" method="post">
             @csrf
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
@@ -151,13 +149,18 @@
                 <div class="card-body">
                   <h5 class="card-title">Tambah Data</h5>
                   <hr>
+                  @if(session()->has('success'))
+               <font style="color: green">{{session('success')}}</font>
                   
-                  <form action="/eparking" method="POST">
+                  @endif
+                  <form action="/admin/eparking" method="POST">
                     <h5 class="card-title">Plat Nomor</h5>
                     @csrf
-                  <input type="text" class="form-control" id="plat" placeholder="" name="platnomor" style="background-color: #F0F8FF; width:100%">
+                  <input type="text" class="form-control" id="plat" placeholder="" name="platnomor" style="background-color: #F0F8FF; width:100%" autofocus required>
                   <h5 class="card-title">Kendaraan</h5>
-                  <input type="text" class="form-control" id="kendaraan" placeholder="Motor / Mobil" name="kendaraan" style="background-color: #F0F8FF; width:100%"><br>
+                  <input type="text" class="form-control" id="kendaraan" placeholder="Motor / Mobil" name="kendaraan" style="background-color: #F0F8FF; width:100%" required>
+                  <h5 class="card-title">Tarif</h5>
+                  <input type="text" class="form-control" id="kendaraan" placeholder="Tarif Parkir" name="tarif" style="background-color: #F0F8FF; width:100%" required><br>
                   <button type="submit" class="btn btn-success">Submit</button>
                   </form>
                 </div>
@@ -174,6 +177,14 @@
         <p class="mb-4">Data Kendaraaan Yang Terpakir <a target="_blank"
                 href="#">@eParking</a>.</p>
                 <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+                <div class="input-group input-group-outline">
+                  <form action="/admin/eparking">
+                   
+                  <label class="form-label"></label>
+                  <input type="search" class="form-control" name="search" placeholder="Search">
+              
+                </form>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -201,14 +212,14 @@
                                 <td>{{$item->kendaraan}}</td>
                                 <td>{{$item->tarif}}</td>
                                 <td>{{$item->created_at}}</td>
-                                <td><form action="/eparking/{{$item->id}}" method="post">
+                                <td><form action="/admin/eparking/{{$item->id}}" method="post">
                                     @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" target="_blank"><i class="fas fa-trash"></i></button>
 
                                 </form>
                                 <td>
-                                    <form action="/eparking/{{$item->id}}" method="POST">
+                                    <form action="/admin/eparking/{{$item->id}}" method="POST">
                                         @csrf
                                         @method('put')
 

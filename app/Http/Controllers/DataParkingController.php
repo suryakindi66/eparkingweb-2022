@@ -15,7 +15,15 @@ class DataParkingController extends Controller
      */
     public function index()
     {
+       
         $dataparking = DataParking::all();
+        /* for searching form */
+        if (request('search')){
+        $dataparking = DataParking::where('platnomor', 'LIKE', '%'.request('search').'%')->get();
+       
+            
+        }
+                /* for searching form */
         $counting = DataParking::all()->count();
         $totalpendapatan = DB::table('data_parkings')->sum('tarif');
         return view('eparking.welcome', ['dataparking' => $dataparking, 'count' => $counting, 'pendapatan' => $totalpendapatan]);
@@ -42,17 +50,22 @@ class DataParkingController extends Controller
         $addparking = new DataParking;
         $addparking->platnomor = $request->platnomor;
         $addparking->kendaraan = $request->kendaraan;
-       if($request->kendaraan == "Mobil" || $request->kendaraan == "mobil"){
-        $tarif = 2000;
+      /* if($request->kendaraan == "Mobil" || $request->kendaraan == "mobil"){
+        $tarif = 20000000;
         $addparking->tarif = $tarif;
         $addparking->save();
         return redirect('/eparking');
        }else{
-           $tarif = 1000;
+           $tarif = 1000000;
            $addparking->tarif = $tarif;
            $addparking->save();
            return redirect('/eparking');
-       }
+       } */
+       $addparking->tarif = $request->tarif;
+       $addparking->save();
+
+       $request->session()->flash('success', 'Data Telah Ditambahkan');
+       return redirect('/admin/eparking');
       
       
     }
@@ -67,8 +80,9 @@ class DataParkingController extends Controller
     {
         $printing = DataParking::find($id);
         if($printing == false){
-            return redirect('/eparking');
+            return redirect('/admin/eparking');
         }
+        
         return view('eparking.cetak-karcis', ['printing' =>$printing]);
     }
 
@@ -105,6 +119,6 @@ class DataParkingController extends Controller
     {
         $deletedata = DataParking::find($id);
         $deletedata->delete();
-        return redirect('/eparking');
+        return redirect('/admin/eparking');
     }
 }

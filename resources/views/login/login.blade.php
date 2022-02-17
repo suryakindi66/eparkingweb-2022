@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="/assets-admin/css/style.css">
 
 	</head>
-	<body>
+	<body style="background-color: #655CD5;">
 	<section class="ftco-section">
 		<div class="container">
 			
@@ -27,15 +27,17 @@
 			      		</div>
 								<div class="w-100">
 									<p class="social-media d-flex justify-content-end">
-										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
-										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+										<a href="/" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-home"></span></a>
 									</p>
 								</div>
 			      	</div>
-							<form action="/login" class="signin-form" method="post">
+					  @if(session()->has('erorlogin'))
+					  <i> <font style="color: red">{{session('erorlogin')}}</font>
+					  @endif
+							<form action="/admin/login" class="signin-form" method="post">
 								@csrf
 			      		<div class="form-group mt-3">
-			      			<input type="text" class="form-control" required name="email">
+			      			<input type="text" class="form-control" required name="name" autofocus>
 			      			<label class="form-control-placeholder" for="username">Username</label>
 			      		</div>
 		            <div class="form-group">
@@ -48,13 +50,14 @@
 		            </div>
 		            
 		          </form>
-		        
+				  <p>Create New Account in <i><a href="/admin/register">here</a>
 		        </div>
 		      </div>
 				</div>
 			</div>
 		</div>
 	</section>
+	
 
 	<script src="/assets-admin/js/jquery.min.js"></script>
   <script src="/assets-admin/js/popper.js"></script>

@@ -14,8 +14,30 @@
 
 </head>
 <div class="table-responsive">
+<center>
+  <h2> PARKIR KENDARAAN </h2>
+  <h2> Tarif Parkir : {{$printing->tarif}} </h2>
+
+  <table class="table table-bordered" id="dataTable" width="30%" cellspacing="0">
+    <tbody>
+      <td> No Kendaraan : {{$printing->platnomor}} </td></table>
+    
+
+    </tbody>
+    <table class="table table-bordered" id="dataTable" width="30%" cellspacing="0">
+      <tbody>
+        <td> Tanggal    : {{$printing->created_at}} </td>
+      </tbody></table>
+      <b>Note : <br>
+        1. Kacris Hilang Harus Menunjukkan STNK <br>
+        2. Barang Hilang Tidak Tanggung Jawab Pihak Parkiran
+      
+</center>
+
+      <!-- TODO: Buat konten web di ini 
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
+      
             <tr>
                 <th>Kode Karcis</th>
                 <th>Plat Nomor</th>
@@ -40,9 +62,10 @@
                
 
             </tr>
-            
+         
         </tbody>
     </table>
+  -->
 </div>
 <script>
     window.print();
