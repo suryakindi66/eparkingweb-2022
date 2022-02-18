@@ -15,6 +15,7 @@ class LoginController extends Controller
     {
       if(Auth::attempt($request->only('name','password'))){
           $request->session()->regenerate();
+          
         return redirect()->intended('/admin/eparking');
       }
       $request->session()->flash('erorlogin' , 'Username / Password Salah !');
@@ -59,6 +60,10 @@ class LoginController extends Controller
     }
 
     */
+    $request->validate([
+      'email' => 'email'
+      
+  ]);
     if (User::where('email', $request->email)->exists() || User::where('name', $request->username)->exists()){
       $request->session()->flash('already', 'Email / Username Sudah Terdaftar! Pastikan Email Dan Username Belum Pernah Terdaftar');
       return redirect('/admin/register');

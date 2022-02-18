@@ -151,11 +151,11 @@
                   <hr>
                   @if(session()->has('success'))
                <font style="color: green">{{session('success')}}</font>
-                  
                   @endif
+                
                   <form action="/admin/eparking" method="POST">
-                    <h5 class="card-title">Plat Nomor</h5>
                     @csrf
+                  <h5 class="card-title">Plat Nomor</h5>
                   <input type="text" class="form-control" id="plat" placeholder="" name="platnomor" style="background-color: #F0F8FF; width:100%" autofocus required>
                   <h5 class="card-title">Kendaraan</h5>
                   <input type="text" class="form-control" id="kendaraan" placeholder="Motor / Mobil" name="kendaraan" style="background-color: #F0F8FF; width:100%" required>

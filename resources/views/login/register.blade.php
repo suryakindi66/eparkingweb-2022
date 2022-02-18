@@ -45,9 +45,11 @@
 						<form action="/admin/register" class="signin-form" method="post">
 								@csrf
 			      		<div class="form-group mt-3">
-			      			<input type="text" class="form-control" required name="email" autofocus>
+			      			<input type="text" class="form-control @error('email') is-invalid @enderror" required name="email" autofocus>
 			      			<label class="form-control-placeholder" for="username">Email</label>
-							
+							  @error('email')
+							  <div class="alert alert-danger">{{ $message }}</div>
+						  @enderror
 			      		</div>
                           <div class="form-group mt-3">
                             <input type="text" class="form-control" required name="username" autofocus>

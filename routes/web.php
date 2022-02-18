@@ -29,7 +29,7 @@ Route::get('/admin/register', [LoginController::class, 'register'])->middleware(
 Route::post('/admin/register', [LoginController::class, 'postregister'])->middleware('guest')->name('login');   
 
 // Login Controller 
-Route::get('/admin/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::get('/admin/login', [LoginController::class, 'index'])->middleware('validationlogin')->name('login');
 Route::post('/admin/login', [LoginController::class, 'postlogin'])->middleware('guest')->name('login');
 Route::post('/admin/login/logout', [LoginController::class, 'logout']);
 Route::get('/admin/login/logout', [LoginController::class, 'logout']);

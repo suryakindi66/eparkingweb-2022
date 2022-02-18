@@ -15,7 +15,7 @@ class DataParkingController extends Controller
      */
     public function index()
     {
-       
+        
         $dataparking = DataParking::all();
         /* for searching form */
         if (request('search')){
@@ -47,6 +47,7 @@ class DataParkingController extends Controller
      */
     public function store(Request $request)
     {
+       
         $addparking = new DataParking;
         $addparking->platnomor = $request->platnomor;
         $addparking->kendaraan = $request->kendaraan;
