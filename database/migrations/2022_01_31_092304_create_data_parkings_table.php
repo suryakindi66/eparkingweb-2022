@@ -16,6 +16,7 @@ class CreateDataParkingsTable extends Migration
         Schema::create('data_parkings', function (Blueprint $table) {
             $table->id();
             $table->text('platnomor');
+            $table->text('user_id');
             $table->text('kendaraan');
             $table->integer('tarif');
             $table->timestamps();

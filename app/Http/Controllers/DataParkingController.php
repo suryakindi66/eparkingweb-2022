@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataParking;
-use DB;
+use Auth;
 
 class DataParkingController extends Controller
 {
@@ -16,7 +16,7 @@ class DataParkingController extends Controller
     public function index()
     {
         
-        $dataparking = DataParking::all();
+        $dataparking = DataParking::where('user_id', Auth::user()->id)->get();
         /* for searching form */
         if (request('search')){
         $dataparking = DataParking::where('platnomor', 'LIKE', '%'.request('search').'%')->get();
@@ -24,8 +24,8 @@ class DataParkingController extends Controller
             
         }
                 /* for searching form */
-        $counting = DataParking::all()->count();
-        $totalpendapatan = DB::table('data_parkings')->sum('tarif');
+        $counting = DataParking::where('user_id', Auth::user()->id)->count();
+        $totalpendapatan = DataParking::where('user_id', Auth::user()->id)->sum('tarif');
         return view('eparking.welcome', ['dataparking' => $dataparking, 'count' => $counting, 'pendapatan' => $totalpendapatan]);
     }
 
@@ -63,6 +63,7 @@ class DataParkingController extends Controller
            return redirect('/eparking');
        } */
        $addparking->tarif = $request->tarif;
+       $addparking->user_id = Auth::user()->id;
        $addparking->save();
 
        $request->session()->flash('success', 'Data Telah Ditambahkan');
