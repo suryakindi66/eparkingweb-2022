@@ -42,8 +42,13 @@ Coded by www.creative-tim.com
       <a class="navbar-brand mr-lg-5" href="/">
         <h5>  Eparking 2022 </h5>
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button class="btn">
+
+          <a href="/admin/login" class="btn btn-primary btn-icon">
+              
+          
+              <span class="nav-link-inner--text">LOGIN</span>
+            </a></span>
       </button>
       <div class="navbar-collapse collapse" id="navbar_global">
         <div class="navbar-collapse-header">

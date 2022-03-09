@@ -41,7 +41,7 @@
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="/" target="_blank">
+      <a class="navbar-brand m-0" href="/admin/eparking" target="_blank">
         <img src="/assets-dashboard/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Eparking</span>
       </a>
@@ -62,7 +62,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="/eparking">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/eparking">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-user me-sm-1 opacity-10"></i>
             </div>
@@ -111,11 +111,30 @@
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-primary shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                <i class="fas fa-car"></i>
-               <i class="fas fa-motorcycle"></i>
+               
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Total Kendaraan Yang Terparkir</p>
-                <h4 class="mb-0">{{$count}}</h4>
+                <h4 class="mb-0">{{$countingmobil}}</h4>
+              </div>
+            </div>
+            
+            
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">@</span>Eparking</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-primary shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                <i class="fas fa-motorcycle"></i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Total Motor</p>
+                <h4 class="mb-0">{{$countingmotor}}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -186,6 +205,7 @@
                 </form>
                 </div>
             </div>
+           
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -231,10 +251,16 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @if(session()->has('notfounddata'))
+                    <center><h6>Belum Ada Data Parkir</h6></center>
+                    @endif
+                    @if(session()->has('notfoundsearch'))
+                    <center><h6>Data Tidak Ditemukan</h6></center>
+                    @endif
                 </div>
             </div>
         </div>
-
+      
     </div>
     <footer><center><font style="Arial">@copyright By Surya Kindi || 2022</center></footer>
         

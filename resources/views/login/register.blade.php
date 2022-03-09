@@ -23,7 +23,7 @@
 						<div class="login-wrap p-4 p-md-5">
 			      	<div class="d-flex">
 			      		<div class="w-100">
-			      			<h4 class="mb-4">Register E-Parking</h4>
+			      			<p> Register E-Parking</p>
 			      		</div>
 						
                          

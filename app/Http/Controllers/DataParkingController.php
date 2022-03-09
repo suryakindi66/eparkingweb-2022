@@ -15,18 +15,24 @@ class DataParkingController extends Controller
      */
     public function index()
     {
-        
         $dataparking = DataParking::where('user_id', Auth::user()->id)->get();
-        /* for searching form */
-        if (request('search')){
-        $dataparking = DataParking::where('platnomor', 'LIKE', '%'.request('search').'%')->get();
-       
-            
+        
+        if(DataParking::where('user_id', Auth::user()->id)->doesntExist()){
+            request(session()->flash('notfounddata'));
+        }elseif(request('search')){
+            $dataparking = DataParking::where('platnomor', 'LIKE', '%'.request('search').'%')->get();
         }
-                /* for searching form */
-        $counting = DataParking::where('user_id', Auth::user()->id)->count();
+        else{
+            $dataparking;    
+        }
+
+       
+    
+                /* end for searching form */
+        $countingmobil = DataParking::where('user_id', Auth::user()->id)->where('kendaraan', 'Mobil')->count();
+        $countingmotor = DataParking::where('user_id', Auth::user()->id)->where('kendaraan', 'Motor')->count();
         $totalpendapatan = DataParking::where('user_id', Auth::user()->id)->sum('tarif');
-        return view('eparking.welcome', ['dataparking' => $dataparking, 'count' => $counting, 'pendapatan' => $totalpendapatan]);
+        return view('eparking.welcome', ['dataparking' => $dataparking, 'countingmobil' => $countingmobil, 'pendapatan' => $totalpendapatan, 'countingmotor' => $countingmotor]);
     }
 
     /**
