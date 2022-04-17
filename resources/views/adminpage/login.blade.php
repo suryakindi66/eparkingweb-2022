@@ -23,46 +23,34 @@
 						<div class="login-wrap p-4 p-md-5">
 			      	<div class="d-flex">
 			      		<div class="w-100">
-			      			<p> Register E-Parking</p>
+			      			<h4 class="mb-4">Login Admin E-Parking</h4>
 			      		</div>
-						
-                         
 								<div class="w-100">
 									<p class="social-media d-flex justify-content-end">
 										<a href="/" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-home"></span></a>
-									
 									</p>
 								</div>
 			      	</div>
-					  	@if(session()->has('sukses'))
-					  		<i><font style="color: green">{{session('sukses')}}</font>
-						   
-						@endif
-						@if(session()->has('already'))
-						  <i> <font style="color: red">{{session('already')}}</font>
-						@endif
-					 
-						<form action="/user/register" class="signin-form" method="post">
+					  @if(session()->has('erorlogin'))
+					  <i> <font style="color: red">{{session('erorlogin')}}</font>
+					  @endif
+							<form action="/admin/login" class="signin-form" method="post">
 								@csrf
-			      		
-                          <div class="form-group mt-3">
-                            <input type="text" class="form-control" required name="username" autofocus>
-                            <label class="form-control-placeholder" for="username">Username</label>
-							
-                        </div>
-
+			      		<div class="form-group mt-3">
+			      			<input type="text" class="form-control" required name="name" autofocus>
+			      			<label class="form-control-placeholder" for="username">Username</label>
+			      		</div>
 		            <div class="form-group">
 		              <input id="password-field" type="password" class="form-control" required name="password">
 		              <label class="form-control-placeholder" for="password">Password</label>
 		              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 		            </div>
-                    
 		            <div class="form-group">
-		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
+		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
 		            </div>
 		            
 		          </form>
-				  <p>Login in <i><a href="/user/login">here</a>
+				 
 		        </div>
 		      </div>
 				</div>

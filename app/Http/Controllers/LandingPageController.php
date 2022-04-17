@@ -14,8 +14,9 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $datauser = User::all()->count();
-        return view('landing.welcome', ['datauser' => $datauser]);
+        $datauser = User::where('role', 'user')->count();
+        $dataadmin = User::where('role', 'admin')->count();
+        return view('landing.welcome', ['datauser' => $datauser, 'dataadmin'=>$dataadmin]);
 
     }
 

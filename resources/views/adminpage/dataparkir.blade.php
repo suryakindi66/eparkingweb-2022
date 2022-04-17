@@ -35,13 +35,24 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="/assets-dashboard/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+  <script>
+    // The function below will start the confirmation dialog
+    function confirmAction() {
+      let confirmAction = confirm("Pastikan Anda Sudah Mengexport Data!");
+      if (confirmAction) {
+        window.location.href = "/admin/dataparkir/deleteall";
+      } else {
+        alert("Action canceled");
+      }
+    }
+  </script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="/user/eparking" target="_blank">
+      <a class="navbar-brand m-0" href="/admin/dashboard" target="_blank">
         <img src="/assets-dashboard/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Eparking</span>
       </a>
@@ -50,7 +61,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="#">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/dashboard">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -62,7 +73,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="/user/eparking">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/dashboard">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-user me-sm-1 opacity-10"></i>
             </div>
@@ -185,28 +196,32 @@
             <div class="col-sm-15">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Data Parkir</h5>
+                  <center><h5 class="card-title">Atur Harga Tarif Parkir</h5>
                   <hr><hr>
-                  @if(session()->has('success'))
-               <font style="color: green">{{session('success')}}</font>
+                  @if(session()->has('datatarifsukses'))
+               <font style="color: green">Sukses Mengatur Daftar Tarif</font>
                   @endif
-                
-                  <form action="/user/eparking" method="POST">
+                @foreach($tarifparkir as $item)
+            
+                  <form action="/admin/dataparkir" method="POST">
                     @csrf
-                  <h5 class="card-title">Plat Nomor</h5>
-                  <input type="text" class="form-control" id="plat" placeholder="" name="platnomor" style="background-color: #F0F8FF; width:100%" autofocus required>
-                  <hr><hr>
-                  <h5 class="card-title">Kendaraan</h5>
-                  <input type="radio" id="html" name="kendaraan" value="Motor">
-                  <label for="html">Motor</label><br>
-                  <input type="radio" id="css" name="kendaraan" value="Mobil">
-                  <label for="css">Mobil</label><br>
-                  <input type="radio" id="javascript" name="kendaraan" value="lainnya">
-                  <label for="javascript">Lainnya</label>
-                  <hr><hr>
+                  <h5 class="card-title">Tarif Harga Motor</h5>
+              
+                  <input type="text" value="{{$item->tarifmotor}}" name="tarifmotor">
+                  <hr>
+                  <h5 class="card-title">Tarif Harga Mobil</h5>
+            
+                  <input type="text" value="{{$item->tarifmobil}}" name="tarifmobil">
+                  <hr>
+                  <h5 class="card-title">Tarif Harga Kendaraan Lainnya</h5>
+             
+                  <input type="text" value="{{$item->tariflainnya}}" name="tariflainnya">
+                  <hr>
+               
                   <button type="submit" class="btn btn-success">Submit</button>
                   </form>
-                </div>
+                  @endforeach
+                </div></center>
               </div>
             </div>
         </div>
@@ -216,6 +231,12 @@
         
       
         <!-- DataTales Example -->
+        @if(session()->has('successdeletealldata'))
+        <script>
+            alert('Semua Data Berhasil Di Delete');
+
+        </script>
+        @endif
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h1 class="h3 mb-2 text-gray-800">Tables</h1> 
@@ -223,7 +244,7 @@
                 href="#">@eParking</a>.</p>
                 <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
                 <div class="input-group input-group-outline">
-                  <form action="/user/eparking">
+                  <form action="/admin/dataparkir">
                    
                   <label class="form-label"></label>
                   <input type="search" class="form-control" name="search" placeholder="Search">
@@ -233,10 +254,11 @@
                 </div>
                 
             </div>
-           
+         
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <button class="btn btn-danger" onclick="confirmAction()" style="float: right"><i class="fa fa-trash"></i>&nbsp;Delete Semua Data</button>
                         <thead>
                             <tr>
                                 <th>Kode Karcis</th>
@@ -269,10 +291,10 @@
                                   <b style="color: red">{{$item->status}}</b> 
                                   @endif
                                 </td>
-                                <td><form action="/user/eparking/status/{{$item->id}}" method="post">
+                                <td><form action="/admin/dataparkir/status/{{$item->id}}" method="post">
                                     @csrf
                                 @method('put')
-                                <button type="submit" class="btn btn-danger" target="_blank">Keluar</i></button>
+                                <button type="submit" class="btn btn-danger" target="_blank">Keluar</button>
 
                                 </form>
                                 <td>

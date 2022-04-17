@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataParkingsTable extends Migration
+class CreateTarifParkirsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateDataParkingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_parkings', function (Blueprint $table) {
+        Schema::create('tarif_parkirs', function (Blueprint $table) {
             $table->id();
-            $table->text('platnomor');
-            $table->text('user_id');
-            $table->text('kendaraan');
-            $table->integer('tarif');
-            $table->text('status');
+            $table->integer('tarifmotor');
+            $table->integer('tarifmobil');
+            $table->integer('tariflainnya');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateDataParkingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data_parkings');
+        Schema::dropIfExists('tarif_parkirs');
     }
 }

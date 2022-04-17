@@ -20,14 +20,18 @@
 
   <table class="table table-bordered" id="dataTable" width="30%" cellspacing="0">
     <tbody>
-      <td> No Kendaraan : {{$printing->platnomor}} </td></table>
+      <td> Jenis Kendaraan : {{$printing->kendaraan}} </td></table>
     
 
-    </tbody>
+    </tbody></table>
     <table class="table table-bordered" id="dataTable" width="30%" cellspacing="0">
       <tbody>
-        <td> Tanggal    : {{$printing->created_at}} </td>
+        <td> Nomor Kendaraan    : {{$printing->platnomor}} </td>
       </tbody></table>
+      <table class="table table-bordered" id="dataTable" width="30%" cellspacing="0">
+        <tbody>
+          <td> Tanggal    : {{$printing->created_at}} </td>
+        </tbody></table>
       <b>Note : <br>
         1. Kacris Hilang Harus Menunjukkan STNK <br>
         2. Barang Hilang Tidak Tanggung Jawab Pihak Parkiran

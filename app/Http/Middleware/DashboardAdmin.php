@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Illuminate\Support\Facades\Auth;
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
 
-class ValidationLogin
+class DashboardAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,12 +16,13 @@ class ValidationLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()){
-            Auth::logout();
-            return redirect('/user/login');
-        }else{
+        if(Auth::guest()){
+            return redirect('/user/login');  
+        }elseif(Auth()->user()->role == "admin"){
             return $next($request);
         }
-        
+        else{
+            return redirect('/user/login');
+        }
     }
 }

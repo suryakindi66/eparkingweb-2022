@@ -16,10 +16,10 @@ class LoginController extends Controller
       if(Auth::attempt($request->only('name','password'))){
           $request->session()->regenerate();
           
-        return redirect()->intended('/admin/eparking');
+        return redirect()->intended('/user/eparking');
       }
       $request->session()->flash('erorlogin' , 'Username / Password Salah !');
-      return redirect('/admin/login');
+      return redirect('/user/login');
         
     }
     public function logout(Request $request)
@@ -30,7 +30,7 @@ class LoginController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect('/admin/login');
+        return redirect('/user/login');
       
     }
 
@@ -64,19 +64,19 @@ class LoginController extends Controller
       'email' => 'email'
       
   ]);
-    if (User::where('email', $request->email)->exists() || User::where('name', $request->username)->exists()){
-      $request->session()->flash('already', 'Email / Username Sudah Terdaftar! Pastikan Email Dan Username Belum Pernah Terdaftar');
-      return redirect('/admin/register');
+    if (User::where('name', $request->username)->exists()){
+      $request->session()->flash('already', 'Username Sudah Terdaftar! Pastikan Email Dan Username Belum Pernah Terdaftar');
+      return redirect('/user/register');
 
     }
    
       $register = new User;
       $register->name = $request->username;
-      $register->email = $request->email;
+      $register->role = "user";
       $register->password = bcrypt($request->password);
       $register->save();
       $request->session()->flash('sukses', 'Registrasi Berhasil, Silahkan Log in!');
-      return redirect('/admin/register');
+      return redirect('/user/register');
     }
     
 }

@@ -41,7 +41,7 @@
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="/user/eparking" target="_blank">
+      <a class="navbar-brand m-0" href="/admin/dashboard" target="_blank">
         <img src="/assets-dashboard/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Eparking</span>
       </a>
@@ -50,11 +50,37 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="#">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/dashboard">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-user opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Welcome {{Auth()->user()->name}}</span>
+            
+          </a>
+        </li>
+       
+      </ul>
+      
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/dataparkir">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
+            <span class="nav-link-text ms-1">Data Parkir</span>
+            
+          </a>
+        </li>
+       
+      </ul>
+            
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/export">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">dashboard</i>
+            </div>
+            <span class="nav-link-text ms-1">Export Total Pendapatan</span>
             
           </a>
         </li>
@@ -62,11 +88,11 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="/user/eparking">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/data/user">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fa fa-user me-sm-1 opacity-10"></i>
+              <i class="material-icons opacity-10">dashboard</i>
             </div>
-            <span class="nav-link-text ms-1">Welcome {{Auth()->user()->name}}</span>
+            <span class="nav-link-text ms-1">Data User Tukang Parkir</span>
             
           </a>
         </li>
@@ -87,6 +113,7 @@
           </ol>
           <h6 class="font-weight-bolder mb-0">Dashboard</h6>
         </nav>
+       
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
@@ -134,7 +161,7 @@
                 <i class="fas fa-motorcycle"></i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Total Motor Yang Terparkir</p>
+                <p class="text-sm mb-0 text-capitalize">Total Motor Yang Terpakir</p>
                 <h4 class="mb-0">{{$countingmotorterparkir}}</h4>
               </div>
             </div>
@@ -169,7 +196,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Total Pendapatan</p>
-                <h4 class="mb-0">{{$pendapatan}}</h4>
+                <h4 class="mb-0">{{$totalpendapatan}}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -179,124 +206,49 @@
           </div>
         </div>
         
-<br><br><br><br><br><br>
+<br><br><br><br><br><br><br> <center><h5>Data User Tukang Parkir</h5>
 
-        <div class="row">
-            <div class="col-sm-15">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Data Parkir</h5>
-                  <hr><hr>
-                  @if(session()->has('success'))
-               <font style="color: green">{{session('success')}}</font>
-                  @endif
+</center><br><br><br>
+<hr><hr>
+    <div class="card-body">
+        <table class="table table-striped">
+         
+            <thead>
+              <tr>
+                <th scope="col" style="text-align: center">#</th>
+                <th scope="col" style="text-align: center">Username</th>
+                <th scope="col" style="text-align: center">Password</th>
+                <th scope="col" style="text-align: center">Detail Data</th>
                 
-                  <form action="/user/eparking" method="POST">
-                    @csrf
-                  <h5 class="card-title">Plat Nomor</h5>
-                  <input type="text" class="form-control" id="plat" placeholder="" name="platnomor" style="background-color: #F0F8FF; width:100%" autofocus required>
-                  <hr><hr>
-                  <h5 class="card-title">Kendaraan</h5>
-                  <input type="radio" id="html" name="kendaraan" value="Motor">
-                  <label for="html">Motor</label><br>
-                  <input type="radio" id="css" name="kendaraan" value="Mobil">
-                  <label for="css">Mobil</label><br>
-                  <input type="radio" id="javascript" name="kendaraan" value="lainnya">
-                  <label for="javascript">Lainnya</label>
-                  <hr><hr>
-                  <button type="submit" class="btn btn-success">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div class="hidden"><hr>
+              </tr>
+            </thead>
+            <tbody>
+                <?php $no=1; ?>
+                @foreach ($user as $item)
+                    
+           
+              <tr>
+                <th scope="row" style="text-align: center; color:black">{{$no++;}}</th>
+                <td style="text-align: center; color:black">{{$item->name}}</td>
+                <td style="text-align: center; color:black" ><input type="password" readonly value="{{$item->password}}" style="background-color: #E8E8E7; border:0px;"></td>
+                <td style="text-align: center; color:black">
+                    <a href="/admin/detail/{{$item->id}}"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
+                    <a href="/admin/delete/{{$item->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
+                </td>
+                    
+              </tr>
+              @endforeach
+            </tbody>
+          </table>        
+    </div>
+        
+        <div class="hidden"><hr><hr>
        
         </div>
         
       
         <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h1 class="h3 mb-2 text-gray-800">Tables</h1> 
-        <p class="mb-4">Data Kendaraaan Yang Terpakir <a target="_blank"
-                href="#">@eParking</a>.</p>
-                <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
-                <div class="input-group input-group-outline">
-                  <form action="/user/eparking">
-                   
-                  <label class="form-label"></label>
-                  <input type="search" class="form-control" name="search" placeholder="Search">
-              
-                </form>
-                
-                </div>
-                
-            </div>
-           
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Kode Karcis</th>
-                                <th>Plat Nomor</th>
-                                <th>Kendaraan</th>
-                                <th>Tarif</th>
-                                <th>Tanggal</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                                <th>Cetak Karcis</th>
-
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                         @foreach ($dataparking as $item)
-                             
-                       
-                            <tr>
-                                <td>DHKB00{{$item->id}}</td>
-                                <td>{{$item->platnomor}}</td>
-                                <td>{{$item->kendaraan}}</td>
-                                <td>{{$item->tarif}}</td>
-                                <td>{{$item->created_at}}</td>
-                                <td>
-                                  @if($item->status == "Masuk")
-                                  <b style="color: green">{{$item->status}}</b> 
-                                  @endif
-                                  @if($item->status == "Keluar")
-                                  <b style="color: red">{{$item->status}}</b> 
-                                  @endif
-                                </td>
-                                <td><form action="/user/eparking/status/{{$item->id}}" method="post">
-                                    @csrf
-                                @method('put')
-                                <button type="submit" class="btn btn-danger" target="_blank">Keluar</i></button>
-
-                                </form>
-                                <td>
-                                    <form action="/user/eparking/{{$item->id}}" method="POST">
-                                        @csrf
-                                        @method('put')
-
-                                    <button type="submit" class="btn btn-warning" ><i class="fas fa-print"></i></button>
-                                </td></form>
-                               
-
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    @if(session()->has('notfounddata'))
-                    <center><h6>Belum Ada Data Parkir</h6></center>
-                    @endif
-                    @if(session()->has('notfoundsearch'))
-                    <center><h6>Data Tidak Ditemukan</h6></center>
-                    @endif
-                </div>
-            </div>
-        </div>
+        
       
     </div>
     <footer><center><font style="Arial">@copyright By Surya Kindi || 2022</center></footer>

@@ -34,7 +34,7 @@
 					  @if(session()->has('erorlogin'))
 					  <i> <font style="color: red">{{session('erorlogin')}}</font>
 					  @endif
-							<form action="/admin/login" class="signin-form" method="post">
+							<form action="/user/login" class="signin-form" method="post">
 								@csrf
 			      		<div class="form-group mt-3">
 			      			<input type="text" class="form-control" required name="name" autofocus>
@@ -50,7 +50,7 @@
 		            </div>
 		            
 		          </form>
-				  <p>Create New Account in <i><a href="/admin/register">here</a>
+				  <p>Create New Account in <i><a href="/user/register">here</a>
 		        </div>
 		      </div>
 				</div>

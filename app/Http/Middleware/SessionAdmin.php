@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Auth;
 
-class ValidationLogin
+class SessionAdmin
 {
     /**
      * Handle an incoming request.
@@ -19,10 +19,8 @@ class ValidationLogin
     {
         if(Auth::check()){
             Auth::logout();
-            return redirect('/user/login');
-        }else{
-            return $next($request);
+            return redirect('/admin/login');
         }
-        
+        return $next($request);
     }
 }

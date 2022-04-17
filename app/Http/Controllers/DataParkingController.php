@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use Illuminate\Http\Request;
 use App\Models\DataParking;
+use App\Models\TarifParkir;
 use Auth;
 
 class DataParkingController extends Controller
@@ -29,10 +30,11 @@ class DataParkingController extends Controller
        
     
                 /* end for searching form */
-        $countingmobil = DataParking::where('user_id', Auth::user()->id)->where('kendaraan', 'Mobil')->count();
-        $countingmotor = DataParking::where('user_id', Auth::user()->id)->where('kendaraan', 'Motor')->count();
+        $countingmobilterparkir = DataParking::where('user_id', Auth::user()->id)->where('kendaraan', 'LIKE', '%'.'Mobil'.'%')->where('status', 'Masuk')->count();
+        $countingmotorterparkir = DataParking::where('user_id', Auth::user()->id)->where('kendaraan', 'LIKE', '%'.'Motor'.'%')->where('status', 'Masuk')->count();
+        $kendaraankeluar = DataParking::where('user_id', Auth::user()->id)->where('status', 'keluar')->count();
         $totalpendapatan = DataParking::where('user_id', Auth::user()->id)->sum('tarif');
-        return view('eparking.welcome', ['dataparking' => $dataparking, 'countingmobil' => $countingmobil, 'pendapatan' => $totalpendapatan, 'countingmotor' => $countingmotor]);
+        return view('eparking.welcome', ['dataparking' => $dataparking, 'countingmobilterparkir' => $countingmobilterparkir, 'pendapatan' => $totalpendapatan, 'countingmotorterparkir' => $countingmotorterparkir, 'kendaraankeluar' => $kendaraankeluar]);
     }
 
     /**
@@ -53,27 +55,24 @@ class DataParkingController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $tarifparking = TarifParkir::all();
         $addparking = new DataParking;
         $addparking->platnomor = $request->platnomor;
         $addparking->kendaraan = $request->kendaraan;
-      /* if($request->kendaraan == "Mobil" || $request->kendaraan == "mobil"){
-        $tarif = 20000000;
-        $addparking->tarif = $tarif;
+        if($request->kendaraan == "Motor"){
+            $addparking->tarif = $tarifparking[0]->tarifmotor;
+        }elseif($request->kendaraan == "Mobil"){
+            $addparking->tarif = $tarifparking[0]->tarifmobil;
+        }else{
+            $addparking->tarif = $tarifparking[0]->tariflainnya;
+        }
+        $addparking->user_id = Auth::user()->id;
+        $addparking->status = "Masuk";
         $addparking->save();
-        return redirect('/eparking');
-       }else{
-           $tarif = 1000000;
-           $addparking->tarif = $tarif;
-           $addparking->save();
-           return redirect('/eparking');
-       } */
-       $addparking->tarif = $request->tarif;
-       $addparking->user_id = Auth::user()->id;
-       $addparking->save();
+ 
 
        $request->session()->flash('success', 'Data Telah Ditambahkan');
-       return redirect('/admin/eparking');
+       return redirect('/user/eparking');
       
       
     }
@@ -88,7 +87,7 @@ class DataParkingController extends Controller
     {
         $printing = DataParking::find($id);
         if($printing == false){
-            return redirect('/admin/eparking');
+            return redirect('/user/eparking');
         }
         
         return view('eparking.cetak-karcis', ['printing' =>$printing]);
@@ -100,9 +99,9 @@ class DataParkingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function viewdestroy()
     {
-        //
+        return view('eparking.uniqkolom');
     }
 
     /**
@@ -112,21 +111,26 @@ class DataParkingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    
 
+
+  
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function status($id)
     {
-        $deletedata = DataParking::find($id);
-        $deletedata->delete();
-        return redirect('/admin/eparking');
+        $statusdata = DataParking::find($id);
+        $statusdata->status = "Keluar";
+        $statusdata->save();
+        return redirect('/user/eparking');
+    }
+    public function export()
+    {
+        $dataparking = DataParking::all();
+        $jumlahmotor = DataParking::where('kendaraan', 'Motor');
     }
 }

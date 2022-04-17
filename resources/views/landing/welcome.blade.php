@@ -42,14 +42,7 @@ Coded by www.creative-tim.com
       <a class="navbar-brand mr-lg-5" href="/">
         <h5>  Eparking 2022 </h5>
       </a>
-      <button class="btn">
-
-          <a href="/admin/login" class="btn btn-primary btn-icon">
-              
-          
-              <span class="nav-link-inner--text">LOGIN</span>
-            </a></span>
-      </button>
+      
       <div class="navbar-collapse collapse" id="navbar_global">
         <div class="navbar-collapse-header">
           <div class="row">
@@ -69,7 +62,7 @@ Coded by www.creative-tim.com
      
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
           <li class="nav-item d-none d-lg-block">
-            <a href="/admin/login" class="btn btn-primary btn-icon">
+            <a href="/user/login" class="btn btn-primary btn-icon">
               <span class="btn-inner--icon">
                 <i class="fas fa-user"></i>
               </span>
@@ -77,7 +70,7 @@ Coded by www.creative-tim.com
             </a>
           </li>
           <li class="nav-item d-none d-lg-block">
-            <a href="/admin/register" class="btn btn-success btn-icon">
+            <a href="/user/register" class="btn btn-success btn-icon">
               <span class="btn-inner--icon">
                 <i class="fas fa-user"></i>
               </span>
@@ -113,9 +106,15 @@ Coded by www.creative-tim.com
                 <i><p class="lead text-white">Tahap Pengembangan, Still Learning </p></i>
                 <i><p class="lead text-white">My First Project &hearts; </p></i>
                 <div class="btn-wrapper mt-5">
+                  <h4>Total Pengguna Sistem : </h4>
                   <a href="#" class="btn btn-lg btn-primary btn-icon mb-3 mb-sm-0">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i></span>
                     <span class="btn-inner--text">User Terdaftar ( {{$datauser}} )</span>
+                  </a>
+                  <h4>Total Admin Sistem : </h4>
+                  <a href="#" class="btn btn-lg btn-primary btn-icon mb-3 mb-sm-0">
+                    <span class="btn-inner--icon"><i class="fas fa-user"></i></span>
+                    <span class="btn-inner--text">User Terdaftar ( {{$dataadmin}} )</span>
                   </a>
                 </div>
                 <div class="mt-5">

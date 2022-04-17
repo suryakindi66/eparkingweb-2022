@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TarifParkir;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 class DatabaseSeeder extends Seeder
@@ -15,8 +16,14 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'name' => 'admin',
-            'password' => bcrypt('admin'),
-            'email' => 'admin@admin.com'
+            'password' => bcrypt('12345'),
+           'role'=>'admin',
+        ]);
+        TarifParkir::create([
+            'id' => '1',
+            'tarifmotor' => '0',
+            'tarifmobil' => '0',
+            'tariflainnya' => '0',
         ]);
     }
 }
