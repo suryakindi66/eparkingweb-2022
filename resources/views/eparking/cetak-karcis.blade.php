@@ -15,7 +15,7 @@
 </head>
 <div class="table-responsive">
 <center>
-  <h2> PARKIR KENDARAAN </h2>
+  <h2> PARKIR KENDARAAN DHKB00{{$printing->id}} </h2>
   <h2> Tarif Parkir : {{$printing->tarif}} </h2>
 
   <table class="table table-bordered" id="dataTable" width="30%" cellspacing="0">

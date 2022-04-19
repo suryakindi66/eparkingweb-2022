@@ -128,9 +128,5 @@ class DataParkingController extends Controller
         $statusdata->save();
         return redirect('/user/eparking');
     }
-    public function export()
-    {
-        $dataparking = DataParking::all();
-        $jumlahmotor = DataParking::where('kendaraan', 'Motor');
-    }
+   
 }
