@@ -41,7 +41,7 @@
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="/admin/eparking" target="_blank">
+      <a class="navbar-brand m-0" href="/admin/dashboard" target="_blank">
         <img src="/assets-dashboard/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Eparking</span>
       </a>
@@ -50,7 +50,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="#">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/dashboard">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-user opacity-10"></i>
             </div>
@@ -73,17 +73,6 @@
         </li>
        
       </ul>
-
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="/admin/export/user">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">dashboard</i>
-            </div>
-            <span class="nav-link-text ms-1">Total Pendapatan Per User</span>
-            
-          </a>
-        </li>
             
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -217,7 +206,41 @@
           </div>
         </div>
         
-<br><br><br><br><br><br><br> 
+<br><br><br><br><br><br><br> <center><h5>Data Export User Tukang Parkir</h5>
+
+</center><br><br><br>
+<hr><hr>
+    <div class="card-body">
+        <table class="table table-striped">
+         
+            <thead>
+              <tr>
+                <th scope="col" style="text-align: center">#</th>
+                <th scope="col" style="text-align: center">Username</th>
+                <th scope="col" style="text-align: center">Password</th>
+                <th scope="col" style="text-align: center">Detail Data</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                <?php $no=1; ?>
+                @foreach ($datauser as $item)
+                    
+           
+              <tr>
+                <th scope="row" style="text-align: center; color:black">{{$no++;}}</th>
+                <td style="text-align: center; color:black">{{$item->name}}</td>
+                <td style="text-align: center; color:black" ><input type="password" readonly value="{{$item->password}}" style="background-color: #E8E8E7; border:0px;"></td>
+                <td style="text-align: center; color:black">
+                    <a href="/admin/export/user/{{$item->id}}"><button type="button" class="btn btn-info"><i class="fa fa-info"></i></button></a>
+                </td>
+                    
+              </tr>
+              @endforeach
+            </tbody>
+          </table>        
+    </div>
+        
         <div class="hidden"><hr><hr>
        
         </div>

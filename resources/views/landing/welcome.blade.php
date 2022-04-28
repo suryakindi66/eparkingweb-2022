@@ -69,14 +69,7 @@ Coded by www.creative-tim.com
               <span class="nav-link-inner--text">LOGIN</span>
             </a>
           </li>
-          <li class="nav-item d-none d-lg-block">
-            <a href="/user/register" class="btn btn-success btn-icon">
-              <span class="btn-inner--icon">
-                <i class="fas fa-user"></i>
-              </span>
-              <span class="nav-link-inner--text">Register</span>
-            </a>
-          </li>
+          
         </ul>
       </div>
     </div>
@@ -111,10 +104,10 @@ Coded by www.creative-tim.com
                     <span class="btn-inner--icon"><i class="fas fa-user"></i></span>
                     <span class="btn-inner--text">User Terdaftar ( {{$datauser}} )</span>
                   </a>
-                  <h4>Total Admin Sistem : </h4>
+                  <br><br><br> <h4>Total Admin Sistem : </h4>
                   <a href="#" class="btn btn-lg btn-primary btn-icon mb-3 mb-sm-0">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i></span>
-                    <span class="btn-inner--text">User Terdaftar ( {{$dataadmin}} )</span>
+                    <span class="btn-inner--text">Admin Terdaftar ( {{$dataadmin}} )</span>
                   </a>
                 </div>
                 <div class="mt-5">

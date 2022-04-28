@@ -170,4 +170,22 @@ class AdminController extends Controller
         request(session()->flash('successdeletealldata'));
         return redirect('/admin/dataparkir');
     }
+    public function exportuser(){
+    $user = User::where('role', 'user')->get();
+    $countingmobilterparkir = DataParking::where('kendaraan', 'LIKE', '%'.'Mobil'.'%')->count();
+    $countingmotorterparkir = DataParking::where('kendaraan', 'LIKE', '%'.'Motor'.'%')->count();
+    $kendaraankeluar = DataParking::where('status', 'keluar')->count();
+    $totalpendapatan = DataParking::sum('tarif');
+     return view('adminpage.dataexportuser', ['countingmobilterparkir'=>$countingmobilterparkir, 'countingmotorterparkir'=>$countingmotorterparkir, 'kendaraankeluar'=>$kendaraankeluar, 
+     'totalpendapatan'=>$totalpendapatan,'datauser'=>$user]);
+    }
+    public function detailexportuser($id){
+        $dataparking = DataParking::where('user_id', $id)->get();
+        $countdataparking = DataParking::sum('tarif');
+        $countingmotor =  DataParking::where('kendaraan', 'Motor')->where('user_id', $id)->count();
+        $countingmobil =  DataParking::where('kendaraan', 'Mobil')->where('user_id', $id)->count();
+        $countinglainnya =  DataParking::where('kendaraan', 'lainnya')->where('user_id', $id)->count();
+        $user = User::where('id', $id)->get();
+        return view('adminpage.exportuser', ['user'=>$user[0], 'countdataparking'=>$countdataparking, 'countingmotor'=>$countingmotor, 'countingmobil'=>$countingmobil, 'countinglainnya'=>$countinglainnya, 'dataparking'=>$dataparking]);
+    }
 }

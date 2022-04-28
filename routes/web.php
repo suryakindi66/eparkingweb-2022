@@ -26,8 +26,8 @@ Route::get('/', [LandingPageController::class, 'index']);
 
 /* Register  */
 
-Route::get('/user/register', [LoginController::class, 'register'])->middleware('guest')->name('login');
-Route::post('/user/register', [LoginController::class, 'postregister'])->middleware('guest')->name('login');   
+
+
 
 // Login Controller 
 Route::get('/user/login', [LoginController::class, 'index'])->middleware('validationlogin')->name('login');
@@ -57,4 +57,8 @@ Route::post('/admin/dataparkir',[AdminController::class, 'postdataparkir'])->mid
 Route::put('/admin/dataparkir/status/{id}', [AdminController::class, 'status'])->middleware('dashboardadmin');
 Route::get('/admin/export', [AdminController::class, 'export'])->middleware('dashboardadmin');
 Route::get('/admin/dataparkir/deleteall', [AdminController::class, 'deleteall'])->middleware('dashboardadmin');
+Route::get('/admin/export/user', [AdminController::class, 'exportuser'])->middleware('dashboardadmin');
+Route::get('/admin/export/user/{id}', [AdminController::class, 'detailexportuser'])->middleware('dashboardadmin');
+Route::get('/admin/register', [LoginController::class, 'register'])->middleware('dashboardadmin');
+Route::post('/admin/register', [LoginController::class, 'postregister'])->middleware('dashboardadmin');
 

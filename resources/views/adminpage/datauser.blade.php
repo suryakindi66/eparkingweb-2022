@@ -207,7 +207,7 @@
         </div>
         
 <br><br><br><br><br><br><br> <center><h5>Data User Tukang Parkir</h5>
-
+<a href="/admin/register"><button class="btn btn-success">Register User</button></a>
 </center><br><br><br>
 <hr><hr>
     <div class="card-body">

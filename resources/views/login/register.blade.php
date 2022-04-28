@@ -42,7 +42,7 @@
 						  <i> <font style="color: red">{{session('already')}}</font>
 						@endif
 					 
-						<form action="/user/register" class="signin-form" method="post">
+						<form action="/admin/register" class="signin-form" method="post">
 								@csrf
 			      		
                           <div class="form-group mt-3">

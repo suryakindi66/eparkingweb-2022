@@ -66,7 +66,7 @@ class LoginController extends Controller
   ]);
     if (User::where('name', $request->username)->exists()){
       $request->session()->flash('already', 'Username Sudah Terdaftar! Pastikan Email Dan Username Belum Pernah Terdaftar');
-      return redirect('/user/register');
+      return redirect('/admin/register');
 
     }
    
@@ -76,7 +76,7 @@ class LoginController extends Controller
       $register->password = bcrypt($request->password);
       $register->save();
       $request->session()->flash('sukses', 'Registrasi Berhasil, Silahkan Log in!');
-      return redirect('/user/register');
+      return redirect('/admin/register');
     }
     
 }

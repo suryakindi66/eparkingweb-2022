@@ -50,7 +50,7 @@
 		            </div>
 		            
 		          </form>
-				  <p>Create New Account in <i><a href="/user/register">here</a>
+				  <p>Register User Chat Admin  / Lupa Password :  <i><a href="https://api.whatsapp.com/send?phone=628813859135">here</a>
 		        </div>
 		      </div>
 				</div>
